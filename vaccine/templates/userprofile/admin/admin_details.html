@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <a href="{% url "add_center"%}" class="btn btn-primary float-end mb-3">Add Center</a>
+    <h1 class="mb-4">Available Centers</h1>
+    
+    {% if centers %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for center in centers %}
+                <tr>
+                    <td>{{ center.name }}</td>
+                    <td>{{ center.address }}</td>
+                    <td>{{ center.phone }}</td>
+                    <td>{{ center.email }}</td>
+                    
+                    <td>{{ center.starttime }}</td>
+                    <td>{{ center.endtime }}</td>
+                    
+                    <td><a href="{% url 'delete' center_id=center.id %}" class="btn btn-sm btn-info">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No centers available.</p>
+    {% endif %}
+</div>
+{% endblock %}

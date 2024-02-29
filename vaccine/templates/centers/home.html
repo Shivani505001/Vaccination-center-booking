@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="mt-5 mb-4">Home</h1>
+    <p>Welcome to the home page</p>
+    
+    {% if booked_centers %}
+    <h2>Booked Centers</h2>
+    <ul class="list-group">
+        {% for center_name in booked_centers %}
+            <li class="list-group-item">{{ center_name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if centers %}
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Working hours</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for center in centers %}
+            <tr>
+                <td>{{ center.name }}</td>
+                <td>{{ center.address }}</td>
+                <td>{{ center.phone }}</td>
+                <td>{{ center.email }}</td>
+                <td>{{ center.starttime }} - {{ center.endtime }}</td>
+
+                <td>
+                    <form action="{% url 'pick-a-date' center_id=center.id %}?date={{ date }}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="center_id" value="{{ center.id }}">
+                        <select name="date" class="form-select">
+                            {% for date in dates %}
+                                <option value="{{ date }}">{{ date }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

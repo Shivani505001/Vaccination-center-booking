@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Remove Center{% endblock %}
+
+{% block content %}
+<div class="center-container">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the center "{{ center.name }}"?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div style="display:flex; ">
+        <input type="submit" value="Delete" class="btn">
+        <a href="{% url 'admin_details' %}" class="btn" style="margin-left:1rem;">Cancel</a>
+        </div>
+    </form>
+    
+</div>
+{% endblock %}
+

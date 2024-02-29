@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Dosage Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Dosage Details</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Center Name</th>
+                <th>Booking Date</th>
+                <th>Total Dosage Administered</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in dosage_details %}
+            <tr>
+                <td>{{ detail.center__name }}</td>
+                <td>{{ detail.booking_date|date:"Y-m-d" }}</td>
+                <td>{{ detail.total_dosage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
