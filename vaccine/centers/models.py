@@ -40,23 +40,23 @@ class Booking(models.Model):
 
 # #permissions
 
-# from django.contrib.auth.models import Permission
-# from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 
-# def create_permissions_after_migration(sender, **kwargs):
-#     content_type = ContentType.objects.get_for_model(VaccineCenter)
-#     permission = Permission.objects.create(
-#         codename="can_add_center",
-#         name="Can add centers",
-#         content_type=content_type,
-#     )
-# # Create permission for deleting centers
-#     delete_permission = Permission.objects.create(
-#         codename="can_delete_center",
-#         name="Can delete centers",
-#         content_type=content_type,
-#         )
+def create_permissions_after_migration(sender, **kwargs):
+    content_type = ContentType.objects.get_for_model(VaccineCenter)
+    permission = Permission.objects.create(
+        codename="can_add_center",
+        name="Can add centers",
+        content_type=content_type,
+    )
+# Create permission for deleting centers
+    delete_permission = Permission.objects.create(
+        codename="can_delete_center",
+        name="Can delete centers",
+        content_type=content_type,
+        )
 
-# # Connect post_migrate signal
-# from django.db.models.signals import post_migrate
-# post_migrate.connect(create_permissions_after_migration)
+# Connect post_migrate signal
+from django.db.models.signals import post_migrate
+post_migrate.connect(create_permissions_after_migration)

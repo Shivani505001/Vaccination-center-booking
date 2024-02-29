@@ -56,7 +56,7 @@ def signup(request):
             login(request,user) 
         #To log a user in, from a view, use login(). It takes an HttpRequest object and a User object. login() saves the user’s ID in the session, using Django’s session framework.
             Userprofile= userprofile.objects.create(user=user)#creating a new instance of userprofile
-            return redirect('centers/home.html')
+            return redirect('myaccount')
     else:
         form=UserCreationForm()
     return render(request,'userprofile/signup.html',{'form':form})
